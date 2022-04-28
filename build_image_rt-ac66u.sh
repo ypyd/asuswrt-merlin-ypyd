@@ -26,7 +26,7 @@ echo $ROOT_PASSWORD | sudo -S apt-get -y install lib32z1-dev lib32stdc++6
 echo "-------------------- git clone the legacy asuswrt-merlin repository"
 rm -rf $DIR_BUILD/asuswrt-merlin
 cd $DIR_BUILD
-git clone https://github.com/RMerl/asuswrt-merlin --config "http.proxy=192.168.11.97:23457"
+git clone https://github.com/RMerl/asuswrt-merlin
 if [ $? != 0 ]; then
   echo "The downloading is failed. Please run this script again."
   exit 2
