@@ -77,7 +77,7 @@ sed -i '/#include <sys\/stat.h>/a#include <sys\/sysmacros.h>' $DIR_BUILD/asuswrt
 
 echo "-------------------- apply the patch to to support EAP_TTLS/PAP for the legacy asuswrt-merlin"
 cd $DIR_BUILD/asuswrt-merlin
-curl -sLf https://raw.githubusercontent.com/ypyd/asuswrt-merlin-ypyd/main/ttls.patch | patch -p0
+curl -sLf https://raw.githubusercontent.com/ypyd/asuswrt-merlin-ypyd/main/rt-ac66u_380.70_0_ttls.patch | patch -p0
 
 echo "-------------------- build the image"
 cd $DIR_BUILD/asuswrt-merlin/release/src-rt-6.x
