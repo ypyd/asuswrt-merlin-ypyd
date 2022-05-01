@@ -36,9 +36,9 @@ fi
 echo "-------------------- git clone the legacy asuswrt-merlin repository"
 rm -rf $DIR_BUILD/asuswrt-merlin
 cd $DIR_BUILD
-git clone --branch 380.70 --depth=1 --single-branch https://github.com/RMerl/asuswrt-merlin
+git clone -c advice.detachedHead=false --branch 380.70 --depth=1 --single-branch https://github.com/RMerl/asuswrt-merlin
 if [ $? != 0 ]; then
-  echo "The downloading is failed. Please run this script again."
+  echo "git clone is failed. Please run this script again."
   exit 2
 fi
 
