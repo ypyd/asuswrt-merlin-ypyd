@@ -1,11 +1,19 @@
 #!/bin/sh
 
 DIR_BUILD=$HOME
+if [ abc$1 != 'abc' ] then
+  DIR_BUILD=$1
+fi
 
 echo "-------------------- install the required packages"
-sudo -S apt-get -y install curl
+sudo -S apt update
 if [ $? != 0 ]; then
-  echo "The root password is wrong. Please run this script again."
+  echo "apt update is failed. Please run this script again."
+  exit 1
+fi
+sudo -S apt -y upgrade
+if [ $? != 0 ]; then
+  echo "apt upgrade is failed. Please run this script again."
   exit 1
 fi
 sudo -S apt-get -y install libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
@@ -14,7 +22,15 @@ sudo -S apt-get -y install libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev a
      python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
      libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev \
      xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools
+if [ $? != 0 ]; then
+  echo "apt get is failed. Please run this script again."
+  exit 1
+fi
 sudo -S apt-get -y install lib32z1-dev lib32stdc++6
+if [ $? != 0 ]; then
+  echo "apt get is failed. Please run this script again."
+  exit 1
+fi
 
 
 echo "-------------------- git clone the legacy asuswrt-merlin repository"
@@ -71,7 +87,7 @@ sed -i '/#include <sys\/stat.h>/a#include <sys\/sysmacros.h>' $DIR_BUILD/asuswrt
 
 echo "-------------------- apply the patch to to support EAP_TTLS/PAP for the legacy asuswrt-merlin"
 cd $DIR_BUILD/asuswrt-merlin
-curl -sLf https://raw.githubusercontent.com/ypyd/asuswrt-merlin-ypyd/main/rt-ac66u_380.70_0_ttls.patch | patch -p0
+curl -sLf https://github.com/ypyd/asuswrt-merlin-ypyd/raw/main/rt-ac66u_380.70_0_ttls.patch | patch -p0
 
 echo "-------------------- build the image"
 cd $DIR_BUILD/asuswrt-merlin/release/src-rt-6.x
