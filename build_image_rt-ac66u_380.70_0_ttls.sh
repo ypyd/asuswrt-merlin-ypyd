@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DIR_BUILD=$HOME
-if [ abc$1 != 'abc' ] then
+if [ abc$1 != 'abc' ]; then
   DIR_BUILD=$1
 fi
 
@@ -36,7 +36,7 @@ fi
 echo "-------------------- git clone the legacy asuswrt-merlin repository"
 rm -rf $DIR_BUILD/asuswrt-merlin
 cd $DIR_BUILD
-git clone -c advice.detachedHead=false --branch 380.70 --depth=1 --single-branch https://github.com/RMerl/asuswrt-merlin
+git clone -c advice.detachedHead=false --branch 380.70 --depth=1 --single-branch https://github.com/RMerl/asuswrt-merlin $2
 if [ $? != 0 ]; then
   echo "git clone is failed. Please run this script again."
   exit 2
