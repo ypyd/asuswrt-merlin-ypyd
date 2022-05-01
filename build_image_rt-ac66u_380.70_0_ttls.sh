@@ -6,6 +6,11 @@ if [ abc$1 != 'abc' ]; then
 fi
 
 echo "-------------------- install the required packages"
+sudo -S dpkg --add-architecture i386
+if [ $? != 0 ]; then
+  echo "dpkg --add-architectur is failed. Please run this script again."
+  exit 1
+fi
 sudo -S apt update
 if [ $? != 0 ]; then
   echo "apt update is failed. Please run this script again."
